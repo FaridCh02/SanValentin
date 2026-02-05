@@ -4,7 +4,7 @@ import JSConfetti from 'js-confetti';
 import mixpanel from './lib/mixpanel';
 
 function App() {
-  const jsConfetti = new JSConfetti();
+  const [jsConfetti, setJsConfetti] = useState(null);
   const [randomValor, setRandomValor] = useState({});
 
   const [valueSi, setValueSi] = useState(false);
@@ -93,6 +93,7 @@ function App() {
   };
 
   useEffect(() => {
+    setJsConfetti(new JSConfetti());
     mixpanel.track('Pagina Cargada');
   }, []);
 
@@ -121,11 +122,13 @@ function App() {
                 mixpanel.track('Boton Si Clickeado');
 
                 setValueSi(true);
-
-                jsConfetti.addConfetti({
-                  emojis: ['😍', '🥰', '❤️', '😘'],
-                  emojiSize: 70,
-                  confettiNumber: 200,
+if (jsConfetti) {
+                  jsConfetti.addConfetti({
+                    emojis: ['😍', '🥰', '❤️', '😘'],
+                    emojiSize: 70,
+                    confettiNumber: 200,
+                  });
+                }onfettiNumber: 200,
                 });
               }}
               className={`bg-green-500 text-white font-bold p-2 rounded-md text-xl`}
